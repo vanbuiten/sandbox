@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Create Branch
-        uses: peterjgrainger/action-create-branch@v2.0.1
+        uses: vanbuiten/action-create-branch@v2.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
