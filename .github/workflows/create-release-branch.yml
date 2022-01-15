@@ -14,7 +14,7 @@ jobs:
       - name: Create Branch
         uses: vanbuiten/action-create-branch@v2.0.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: 'release/${{ github.event.inputs.release_version }}'
   
@@ -26,7 +26,7 @@ jobs:
       - name: Create Pull Request
         uses: vanbuiten/create-pull-request@v3
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: 'release/${{ github.event.inputs.release_version }}'
           delete-branch: true
           title: 'Release ${{ github.event.inputs.release_version }}'
