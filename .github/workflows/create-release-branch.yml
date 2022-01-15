@@ -17,23 +17,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           branch: 'release/${{ github.event.inputs.release_version }}'
-  
-  create-release-pr:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: Create Pull Request
-        uses: vanbuiten/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'release/${{ github.event.inputs.release_version }}'
-          delete-branch: true
-          title: 'Release ${{ github.event.inputs.release_version }}'
-          body: |
-            Release ${{ github.event.inputs.release_version }}
-
-            [1]: https://github.com/vanbuiten/sandbox
-          assignees: vanbuiten
-          reviewers: vanbuiten
-          draft: false
