@@ -27,5 +27,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build and push to the docker registry
         run: |
-          docker build -t vanbuiten/sandbox:${{ github.event.release.tag_name }} .
+          docker build -t davidvanbuiten/sandbox:${{ github.event.release.tag_name }} .
           docker push davidvanbuiten/sandbox:${{ github.event.release.tag_name }}
