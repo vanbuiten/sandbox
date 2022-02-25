@@ -1,31 +1,25 @@
-name: Create release branch
+name: Build and push the Signalen API when a new release is published
 
 on:
   release:
     types: [ published ]
 
 jobs:
-  debug:
-    name: Shows the debug information
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Show the release tag (Debug)
-        run: echo "${{ github.event.release.tag_name }}"
-
-      - name: Dockerhub username (Debug)
-        run: echo "${{ secrets.DOCKERHUB_USERNAME }}"
-
   build_and_push:
-    name: Build and push API docker container to the docker registry
+    name: Build an Docker image for the release and push it to the DockerHub registry
     runs-on: ubuntu-latest
 
     steps:
-      - name: Docker login
+      - uses: actions/checkout@v2
+
+      - name: Login to Docker
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-      - uses: actions/checkout@v2
-      - name: Build and push to the docker registry
-        run: |
-          docker build -t davidvanbuiten/sandbox:${{ github.event.release.tag_name }} .
-          docker push davidvanbuiten/sandbox:${{ github.event.release.tag_name }}
+      - name: Release tag
+        run: echo "${{ github.event.release.tag_name }}"
+
+      - name: Build the Docker image release
+        run: docker build -t davidvanbuiten/sandbox:${{ github.event.release.tag_name }} .
+
+      - name: Push the tagged image to Docker
+        run: docker push davidvanbuiten/sandbox:${{ github.event.release.tag_name }}
