@@ -12,3 +12,20 @@ jobs:
     steps:
       - name: Show the release tag (Debug)
         run: echo "${{ github.event.release.tag_name }}"
+
+      - name: Dockerhub username (Debug)
+        run: echo "${{ secrets.DOCKERHUB_USERNAME }}"
+
+  build_and_push:
+    name: Build and push API docker container to the docker registry
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Docker login
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      - uses: actions/checkout@v2
+      - name: Build and push to the docker registry
+        run: |
+          docker build -t vanbuiten/sandbox:${{ github.event.release.tag_name }} .
+          docker push davidvanbuiten/sandbox:${{ github.event.release.tag_name }}
