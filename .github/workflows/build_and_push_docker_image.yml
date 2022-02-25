@@ -1,0 +1,14 @@
+name: Create release branch
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  debug:
+    name: Shows the debug information
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show the release tag (Debug)
+        run: echo "${{ github.event.release.tag_name }}"
