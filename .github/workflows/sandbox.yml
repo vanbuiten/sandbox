@@ -1,8 +1,7 @@
 name: Sandbox action for testing stuff
 
 on:
-  release:
-    types: [ push ]
+  workflow_dispatch:
 
 jobs:
   sandbox:
