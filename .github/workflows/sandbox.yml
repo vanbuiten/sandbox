@@ -20,4 +20,5 @@ jobs:
       - name: Can I print this env variable in python?
         env:
           TEST_VAR: Do you see me?
-        run: "import os; os.getenv('TEST_VAR', 'Nope')" | python manage.py shell
+        run: python sandbox.py
+        shell: sh
