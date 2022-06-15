@@ -1,0 +1,23 @@
+name: Sandbox action for testing stuff
+
+on:
+  release:
+    types: [ push ]
+
+jobs:
+  sandbox:
+    name: Testing stuff
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Can I print this env variable in python?
+        env:
+          TEST_VAR: Do you see me?
+        run: "import os; os.getenv('TEST_VAR', 'Nope')" | python manage.py shell
