@@ -19,4 +19,5 @@ jobs:
       - name: Can I print this env variable in python?
         env:
           TEST_VAR: Do you see me?
+          IS_GITHUB_WORKFLOW: true
         run: python sandbox.py
