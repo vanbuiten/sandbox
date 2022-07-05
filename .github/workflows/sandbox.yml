@@ -21,3 +21,6 @@ jobs:
           TEST_VAR: Do you see me?
           IS_GITHUB_WORKFLOW: true
         run: python sandbox.py
+
+      - name: Hello world markdown
+        run: echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
