@@ -9,9 +9,11 @@ updates:
     directory: "/"
     schedule:
       interval: daily
-      time: "11:45"
+      time: "11:50"
       timezone: "Europe/Amsterdam"
     reviewers:
       - "vanbuiten"
     target-branch: "develop"
+    commit-message:
+      prefix: "test - "
     
