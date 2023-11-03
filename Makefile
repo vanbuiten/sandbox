@@ -11,7 +11,6 @@ install: pip-tools                  ## Install requirements and sync venv with e
 
 requirements: pip-tools             ## Upgrade requirements (in requirements.in) to latest versions and compile requirements.txt
 	pip-compile --upgrade --output-file requirements.txt requirements.in
-	pip-compile --upgrade --output-file requirements_test.txt requirements_test.in
 	pip-compile --upgrade --output-file requirements_dev.txt requirements_dev.in
 
 upgrade: requirements install       ## Run 'requirements' and 'install' targets
