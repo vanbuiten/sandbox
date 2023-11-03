@@ -9,5 +9,9 @@ updates:
     directory: "/"
     schedule:
       interval: daily
-    post-update-script:
-      - make requirements
+      time: "12:00"
+      timezone: "Europe/Amsterdam"
+    reviewers:
+      - "vanbuiten"
+    target-branch: "develop"
+    
