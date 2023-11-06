@@ -2,6 +2,7 @@ name: Update all requirements in a dependabot PR
 on: pull_request
 
 permissions:
+  contents: write
   pull-requests: write
   issues: write
   repository-projects: write
