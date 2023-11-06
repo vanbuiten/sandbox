@@ -11,9 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]' || github.actor == 'vanbuiten'
     steps:
-      - uses: actions/checkout@v4
-
       - name: Checkout source branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
         run: git checkout ${{ github.event.pull_request.source_branch }}
 
       - name: Update requirements
