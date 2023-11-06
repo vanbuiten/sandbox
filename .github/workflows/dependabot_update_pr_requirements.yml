@@ -9,7 +9,7 @@ permissions:
 jobs:
   dependabot:
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    if: github.actor == 'dependabot[bot]' or github.actor == 'vanbuiten'
     steps:
       - name: Check out the code
         uses: actions/checkout@v4
