@@ -4,4 +4,11 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-dependency-injector==4.40.0
+annotated-types==0.6.0
+dependency-injector==4.41.0
+pydantic==2.4.2
+pydantic-core==2.10.1
+pydantic-settings==2.0.3
+python-dotenv==1.0.0
+six==1.16.0
+typing-extensions==4.8.0
