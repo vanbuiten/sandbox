@@ -12,9 +12,9 @@ pydantic==2.4.0
     # via
     #   -r requirements.in
     #   pydantic-settings
-pydantic-core==2.10.1
+pydantic-core==2.10.0
     # via pydantic
-pydantic-settings==2.0.1
+pydantic-settings==2.0.3
     # via -r requirements.in
 python-dotenv==1.0.0
     # via pydantic-settings
