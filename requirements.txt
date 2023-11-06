@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-pydantic==2.4.0
+pydantic==2.4.1
     # via
     #   -r requirements.in
     #   pydantic-settings

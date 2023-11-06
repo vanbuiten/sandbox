@@ -9,7 +9,7 @@ updates:
     directory: "/"
     schedule:
       interval: daily
-      time: "15:40"
+      time: "15:42"
       timezone: "Europe/Amsterdam"
     reviewers:
       - "vanbuiten"
