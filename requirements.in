@@ -1,1 +1,3 @@
-django
+pydantic
+pydantic-settings
+dependency-injector

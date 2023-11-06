@@ -4,32 +4,47 @@
 #
 #    pip-compile --output-file=requirements_dev.txt requirements_dev.in
 #
-asgiref==3.7.2
+annotated-types==0.6.0
     # via
     #   -r ./requirements.txt
-    #   django
+    #   pydantic
 build==1.0.3
     # via pip-tools
 click==8.1.7
     # via pip-tools
-django==3.2.23
+dependency-injector==4.41.0
     # via -r ./requirements.txt
 packaging==23.2
     # via build
 pip-tools==7.3.0
     # via -r requirements_dev.in
+pydantic==2.4.2
+    # via
+    #   -r ./requirements.txt
+    #   pydantic-settings
+pydantic-core==2.10.1
+    # via
+    #   -r ./requirements.txt
+    #   pydantic
+pydantic-settings==2.0.3
+    # via -r ./requirements.txt
 pyproject-hooks==1.0.0
     # via build
-pytz==2023.3.post1
+python-dotenv==1.0.0
     # via
     #   -r ./requirements.txt
-    #   django
+    #   pydantic-settings
 ruff==0.1.4
     # via -r requirements_dev.in
-sqlparse==0.4.4
+six==1.16.0
     # via
     #   -r ./requirements.txt
-    #   django
+    #   dependency-injector
+typing-extensions==4.8.0
+    # via
+    #   -r ./requirements.txt
+    #   pydantic
+    #   pydantic-core
 wheel==0.41.3
     # via pip-tools
 

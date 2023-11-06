@@ -4,11 +4,23 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-asgiref==3.7.2
-    # via django
-django==3.2.23
+annotated-types==0.6.0
+    # via pydantic
+dependency-injector==4.41.0
     # via -r requirements.in
-pytz==2023.3.post1
-    # via django
-sqlparse==0.4.4
-    # via django
+pydantic==2.4.2
+    # via
+    #   -r requirements.in
+    #   pydantic-settings
+pydantic-core==2.10.1
+    # via pydantic
+pydantic-settings==2.0.3
+    # via -r requirements.in
+python-dotenv==1.0.0
+    # via pydantic-settings
+six==1.16.0
+    # via dependency-injector
+typing-extensions==4.8.0
+    # via
+    #   pydantic
+    #   pydantic-core
