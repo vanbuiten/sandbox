@@ -12,21 +12,21 @@ build==1.0.3
     # via pip-tools
 click==8.1.7
     # via pip-tools
-dependency-injector==4.41.0
+dependency-injector==4.40.0
     # via -r ./requirements.txt
 packaging==23.2
     # via build
 pip-tools==7.3.0
     # via -r requirements_dev.in
-pydantic==2.4.2
+pydantic==2.5.0
     # via
     #   -r ./requirements.txt
     #   pydantic-settings
-pydantic-core==2.10.1
+pydantic-core==2.14.1
     # via
     #   -r ./requirements.txt
     #   pydantic
-pydantic-settings==2.0.3
+pydantic-settings==2.1.0
     # via -r ./requirements.txt
 pyproject-hooks==1.0.0
     # via build
