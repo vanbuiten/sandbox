@@ -4,47 +4,22 @@
 #
 #    pip-compile --output-file=requirements_dev.txt requirements_dev.in
 #
-annotated-types==0.6.0
-    # via
-    #   -r ./requirements.txt
-    #   pydantic
 build==1.0.3
     # via pip-tools
 click==8.1.7
     # via pip-tools
-dependency-injector==4.41.0
+dependency-injector==4.40.0
     # via -r ./requirements.txt
 packaging==23.2
     # via build
 pip-tools==7.3.0
     # via -r requirements_dev.in
-pydantic==2.4.2
-    # via
-    #   -r ./requirements.txt
-    #   pydantic-settings
-pydantic-core==2.10.1
-    # via
-    #   -r ./requirements.txt
-    #   pydantic
-pydantic-settings==2.0.3
-    # via -r ./requirements.txt
 pyproject-hooks==1.0.0
     # via build
-python-dotenv==1.0.0
-    # via
-    #   -r ./requirements.txt
-    #   pydantic-settings
-ruff==0.1.4
+ruff==0.1.6
     # via -r requirements_dev.in
 six==1.16.0
-    # via
-    #   -r ./requirements.txt
-    #   dependency-injector
-typing-extensions==4.8.0
-    # via
-    #   -r ./requirements.txt
-    #   pydantic
-    #   pydantic-core
+    # via dependency-injector
 wheel==0.41.3
     # via pip-tools
 
