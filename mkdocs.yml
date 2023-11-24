@@ -1,0 +1,27 @@
+site_name: My Sandbox
+repo_url: https://github.com/vanbuiten/sandbox
+
+theme:
+  name: "material"
+  palette:
+    # Palette toggle for light mode
+    - scheme: light
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+
+plugins:
+  search: null
+  mkdocstrings:
+    handlers:
+      python:
+        options:
+          docstring_style: numpy
+          show_docstring_examples: true

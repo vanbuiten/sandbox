@@ -1,6 +1,28 @@
-FROM busybox:latest
+FROM python:3.11 AS base
 
-LABEL version = "0.0.1"
-LABEL author = "David van Buiten"
+ENV PYTHONUNBUFFERED 1
 
-CMD ["echo", "Used for testing"]
+RUN set -eux; \
+    curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry python3; \
+    cd /usr/local/bin; \
+    ln -s /opt/poetry/bin/poetry; \
+    poetry config virtualenvs.create false; \
+    poetry completions bash >> ~/.bash_completion
+
+COPY . /app
+
+WORKDIR /app
+
+FROM base AS app
+
+RUN poetry init
+
+WORKDIR /app/app
+
+FROM base AS docs
+
+RUN poetry install --with docs
+
+EXPOSE 8000
+
+ENTRYPOINT ["mkdocs", "serve", "-f", "/app/mkdocs.yml", "--dev-addr=0.0.0.0:8000"]
