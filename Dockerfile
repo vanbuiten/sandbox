@@ -15,7 +15,7 @@ WORKDIR /app
 
 FROM base AS app
 
-RUN poetry init
+RUN poetry install
 
 WORKDIR /app/app
 
