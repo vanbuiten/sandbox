@@ -1,4 +1,4 @@
-name: Build and deploy docs
+name: Build and commit Documentation in gh-pages branch
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: Build and commit Documentation in gh-pages branch
     runs-on: ubuntu-latest
 
     steps:
