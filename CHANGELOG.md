@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.2](https://github.com/vanbuiten/sandbox/compare/v0.3.1...v0.3.2) (2023-12-06)
+
+
+### Bug Fixes
+
+* revert previous code ([985977c](https://github.com/vanbuiten/sandbox/commit/985977cc737dc3bc551b0302e892b877ded49b8a))
+* trigger creation of a release? ([d1db460](https://github.com/vanbuiten/sandbox/commit/d1db460fdaf2e5f0096c453d703206f51119b127))
+
 ## [0.3.1](https://github.com/vanbuiten/sandbox/compare/v0.3.0...v0.3.1) (2023-12-06)
 
 
