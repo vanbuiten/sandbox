@@ -20,3 +20,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: python
           target-branch: main
+
+      - name: Create Release
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const response = await github.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: '${{steps.release.outputs.tag_name}}' // use output from previous step
+            });
