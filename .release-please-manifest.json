@@ -1,4 +1,5 @@
 {
+  "draft": false,
   "app/version.py": "version.py",
   ".": "0.3.0"
 }
