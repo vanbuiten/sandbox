@@ -15,14 +15,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: python
           default-branch: main
-
-      - name: Github Release
-        # Runs if the previous step was a success, and it was on the main branch
-        if: ${{ steps.release.outputs.release_created }}
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.release.outputs.tag_name }}
-          release_name: ${{ steps.release.outputs.tag_name }}
-          body_path: ${{ steps.release.outputs.body_path }}
