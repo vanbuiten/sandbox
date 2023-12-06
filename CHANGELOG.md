@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/vanbuiten/sandbox/compare/v0.2.2...v0.2.3) (2023-12-06)
+
+
+### Bug Fixes
+
+* remove deprecated github action create-release ([576cb02](https://github.com/vanbuiten/sandbox/commit/576cb02ce052051843038f4f38b5017b0ae7cbac))
+
 ## [0.2.2](https://github.com/vanbuiten/sandbox/compare/v0.2.1...v0.2.2) (2023-12-06)
 
 
