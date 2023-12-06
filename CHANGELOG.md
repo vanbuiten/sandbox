@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/vanbuiten/sandbox/compare/v0.3.0...v0.3.1) (2023-12-06)
+
+
+### Bug Fixes
+
+* release please workflow ([515e142](https://github.com/vanbuiten/sandbox/commit/515e1425e6b314e53086e758a511737e32d03e27))
+
 ## [0.3.0](https://github.com/vanbuiten/sandbox/compare/v0.2.3...v0.3.0) (2023-12-06)
 
 
