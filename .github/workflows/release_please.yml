@@ -1,0 +1,28 @@
+name: Release Please
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - id: release
+        name: Release Please
+        uses: GoogleCloudPlatform/release-please-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: python
+          default-branch: main
+
+      - name: Github Release
+        # Runs if the previous step was a success, and it was on the main branch
+        if: ${{ steps.release.outputs.release_created }}
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.release.outputs.tag }}
+          release_name: ${{ steps.release.outputs.tag }}
+          body: ${{ steps.release.outputs.body }}
