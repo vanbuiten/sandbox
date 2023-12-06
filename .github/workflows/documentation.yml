@@ -3,7 +3,7 @@ name: Build and commit Documentation in gh-pages branch
 on:
   push:
     branches:
-      - master
+      - main
       - develop
 
 jobs:
