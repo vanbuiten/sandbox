@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.3](https://github.com/vanbuiten/sandbox/compare/v0.3.2...v0.3.3) (2023-12-07)
+
+
+### Bug Fixes
+
+* Use personal PAT instead of GITHUB_TOKEN ([3f3850f](https://github.com/vanbuiten/sandbox/commit/3f3850f62cc44fc75d762198b6621391ed0808b3))
+
 ## [0.3.2](https://github.com/vanbuiten/sandbox/compare/v0.3.1...v0.3.2) (2023-12-06)
 
 
