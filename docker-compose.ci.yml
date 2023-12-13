@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  ci:
+    image: vanbuiten/sandbox
+    build:
+      context: .
+      target: dev
