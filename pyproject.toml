@@ -8,6 +8,8 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "3.11.*"
 uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
+structlog = "^23.2.0"
+rich = "^13.7.0"
 
 
 [tool.poetry.group.docs.dependencies]
@@ -16,10 +18,29 @@ mkdocstrings = {extras = ["python"], version = "^0.24.0"}
 
 
 [tool.poetry.group.dev.dependencies]
-isort = "^5.12.0"
-flake8 = "^6.1.0"
 mypy = "^1.7.1"
+ruff = "^0.1.7"
+mypy-baseline = "^0.6.1"
+pytest = "^7.4.3"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+ignore = [
+    "D100", "D101", "D102", "D103", "D104", "D105", "D107",
+    "D203", "D205", "D213",
+    "B905",
+    "F401"]
+line-length = 120
+select = ["B", "D", "E", "F", "I", "N", "Q", "W"]
+
+[tool.ruff.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.pydocstyle]
+convention = "numpy"
+
+[tool.mypy]
+strict = true

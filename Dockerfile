@@ -19,6 +19,10 @@ RUN poetry install
 
 WORKDIR /app/app
 
+FROM base AS dev
+
+RUN poetry install --with dev
+
 FROM base AS docs
 
 RUN poetry install --with docs
