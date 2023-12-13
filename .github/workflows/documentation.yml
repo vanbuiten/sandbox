@@ -35,6 +35,10 @@ jobs:
       - name: Build documentation
         run: poetry run mkdocs build --clean --verbose
 
+      # Add the CNAME file
+      - name: Create CNAME file
+        run: echo "sandbox.davidvanbuiten.nl" > site/CNAME
+
       # Deploy to GitHub Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
