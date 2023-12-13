@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/vanbuiten/sandbox/compare/v0.3.3...v1.0.0) (2023-12-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Added sqlalchemy
+
+### Miscellaneous Chores
+
+* Added sqlalchemy ([65f8dde](https://github.com/vanbuiten/sandbox/commit/65f8dde41c990bf5c13d264d1a9311da6305152c))
+
 ## [0.3.3](https://github.com/vanbuiten/sandbox/compare/v0.3.2...v0.3.3) (2023-12-07)
 
 
