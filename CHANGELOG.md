@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.4](https://github.com/vanbuiten/sandbox/compare/v0.3.3...v0.3.4) (2023-12-13)
+
+
+### Documentation
+
+* Added github ci status badge to the README.md ([9e0f567](https://github.com/vanbuiten/sandbox/commit/9e0f5678edaa815d04a90df4e6838faf8b320227))
+* Updated the README.md ([6057feb](https://github.com/vanbuiten/sandbox/commit/6057feb0ca9b8511d414b23396d4aa1055d7b222))
+
 ## [0.3.3](https://github.com/vanbuiten/sandbox/compare/v0.3.2...v0.3.3) (2023-12-07)
 
 
