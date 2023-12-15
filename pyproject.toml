@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sandbox"
-version = "0.3.4"
+version = "0.4.0"
 description = "My sandbox project"
 authors = ["David van Buiten <david.vanbuiten@gmail.com>"]
 readme = "README.md"
