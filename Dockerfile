@@ -19,7 +19,11 @@ RUN poetry install
 
 WORKDIR /app/app
 
-FROM base AS dev
+EXPOSE 8000
+
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
+
+FROM app AS dev
 
 RUN poetry install --with dev
 

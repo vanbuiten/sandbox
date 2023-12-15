@@ -11,6 +11,7 @@ uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
 structlog = "^23.2.0"
 rich = "^13.7.0"
 sqlalchemy = "^2.0.23"
+fastapi = "^0.105.0"
 
 
 [tool.poetry.group.docs.dependencies]
@@ -23,6 +24,7 @@ mypy = "^1.7.1"
 ruff = "^0.1.7"
 mypy-baseline = "^0.6.1"
 pytest = "^7.4.3"
+httpx = "^0.25.2"
 
 [build-system]
 requires = ["poetry-core"]
@@ -31,11 +33,19 @@ build-backend = "poetry.core.masonry.api"
 [tool.ruff]
 ignore = [
     "D100", "D101", "D102", "D103", "D104", "D105", "D107",
-    "D203", "D205", "D213",
+    "D200", "D203", "D205", "D213",
     "B905",
     "F401"]
 line-length = 120
 select = ["B", "D", "E", "F", "I", "N", "Q", "W"]
+
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+known-local-folder = ["app"]
+
 
 [tool.ruff.flake8-quotes]
 inline-quotes = "single"
@@ -45,3 +55,12 @@ convention = "numpy"
 
 [tool.mypy]
 strict = true
+
+[tool.pytest.ini_options]
+console_output_style = "progress"
+python_files = [
+    "test_*.py"
+]
+testpaths = [
+    "tests"
+]
