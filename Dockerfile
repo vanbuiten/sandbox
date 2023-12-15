@@ -10,6 +10,7 @@ RUN set -eux; \
     poetry completions bash >> ~/.bash_completion
 
 COPY . /app
+ENV PYTHONPATH=/app
 
 WORKDIR /app
 
@@ -26,6 +27,8 @@ CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
 FROM app AS dev
 
 RUN poetry install --with dev
+
+WORKDIR /app
 
 FROM base AS docs
 
