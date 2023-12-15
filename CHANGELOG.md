@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/vanbuiten/sandbox/compare/v0.4.0...v0.4.1) (2023-12-15)
+
+
+### Bug Fixes
+
+* PYTHONPATH in Dockerfile ([eb6c880](https://github.com/vanbuiten/sandbox/commit/eb6c8804cebf7940b42cceebb325f7a5ca980a93))
+
 ## [0.4.0](https://github.com/vanbuiten/sandbox/compare/v0.3.4...v0.4.0) (2023-12-15)
 
 
