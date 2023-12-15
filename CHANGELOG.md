@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.0](https://github.com/vanbuiten/sandbox/compare/v0.3.4...v0.4.0) (2023-12-15)
+
+
+### Features
+
+* Added a simple FastAPI app and unit test ([c627e1a](https://github.com/vanbuiten/sandbox/commit/c627e1ae5d513fe21002548e1cb0d4711bb856af))
+
+
+### Bug Fixes
+
+* github workflow for linting ([4df1b80](https://github.com/vanbuiten/sandbox/commit/4df1b80ece3b8020a2548f086a1640e26803653b))
+* order of imports ([a9beac4](https://github.com/vanbuiten/sandbox/commit/a9beac481a393f0ccbd2e2dfc9575ecd9690d369))
+
 ## [0.3.4](https://github.com/vanbuiten/sandbox/compare/v0.3.3...v0.3.4) (2023-12-13)
 
 
