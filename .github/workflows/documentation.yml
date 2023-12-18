@@ -5,7 +5,7 @@ on:
     types: [ published ]
 
 jobs:
-  build:
+  documentation:
     name: Build and commit Documentation in gh-pages branch
     runs-on: ubuntu-latest
 
@@ -30,10 +30,10 @@ jobs:
 
       # Install dependencies
       - name: Install dependencies
-        run: poetry install --with docs
+        run: poetry --directory=backend/app install --with docs
 
       - name: Build documentation
-        run: poetry run mkdocs build --clean --verbose
+        run: poetry --directory=backend/app run mkdocs build --clean --verbose
 
       # Add the CNAME file
       - name: Create CNAME file
