@@ -2,17 +2,19 @@ version: '3.4'
 
 services:
   app:
-    image: vanbuiten/sandbox
     build:
       context: .
       target: app
+    depends_on:
+      - database
     ports:
       - "8240:8000"
     volumes:
       - .:/app
+    env_file: .env
     command:
       - uvicorn
-      - api:app
+      - app.api:app
       - --host
       - 0.0.0.0
       - --port
@@ -20,7 +22,6 @@ services:
       - --reload
 
   docs:
-    image: vanbuiten/sandbox
     build:
       context: .
       target: docs
@@ -28,3 +29,20 @@ services:
       - "8241:8000"
     volumes:
       - .:/app
+    env_file: .env
+
+  database:
+    image: postgres:16.1
+    ports:
+      - "5409:5432"
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    env_file: .env
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  database-data:

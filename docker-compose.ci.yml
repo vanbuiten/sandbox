@@ -2,9 +2,20 @@ version: '3.4'
 
 services:
   ci:
-    image: vanbuiten/sandbox
     build:
       context: .
       target: dev
+    depends_on:
+      - db
     volumes:
       - .:/app
+    env_file: .env.test
+
+  db:
+    image: postgres:16.1
+    env_file: .env.test
+    healthcheck:
+      test: [ "CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5

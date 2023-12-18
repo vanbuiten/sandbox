@@ -1,2 +1,10 @@
 [run]
-omit = */tests/*
+omit =
+    */tests/*
+    app/core/config.py
+
+[report]
+fail_under = 62
+skip_covered = True
+show_missing = True
+sort = Cover

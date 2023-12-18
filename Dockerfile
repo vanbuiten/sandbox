@@ -14,26 +14,21 @@ ENV PYTHONPATH=/app
 
 WORKDIR /app
 
+EXPOSE 8000
+
 FROM base AS app
 
 RUN poetry install
 
-WORKDIR /app/app
+ENTRYPOINT ["/app/docker/entrypoint.sh"]
+CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
 
-EXPOSE 8000
-
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
-
-FROM app AS dev
+FROM base AS dev
 
 RUN poetry install --with dev
-
-WORKDIR /app
 
 FROM base AS docs
 
 RUN poetry install --with docs
-
-EXPOSE 8000
 
 ENTRYPOINT ["mkdocs", "serve", "-f", "/app/mkdocs.yml", "--dev-addr=0.0.0.0:8000"]
