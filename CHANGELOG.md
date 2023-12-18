@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.5.0](https://github.com/vanbuiten/sandbox/compare/v0.4.1...v0.5.0) (2023-12-18)
+
+
+### Features
+
+* Added pydantic-settings, sqlalchemy, and updated some stuff ([ca72299](https://github.com/vanbuiten/sandbox/commit/ca72299a37189bb2e15bdd10a7a40e2831faa325))
+* moved python from app to backend folder ([77085fa](https://github.com/vanbuiten/sandbox/commit/77085fa2fa04c7669f60a57b04103dda74ba6cbd))
+
+
+### Bug Fixes
+
+* docs setup ([dc8bfc0](https://github.com/vanbuiten/sandbox/commit/dc8bfc02af5433e3609831bb907130091df676cb))
+
 ## [0.4.1](https://github.com/vanbuiten/sandbox/compare/v0.4.0...v0.4.1) (2023-12-15)
 
 
