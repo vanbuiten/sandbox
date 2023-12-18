@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.2](https://github.com/vanbuiten/sandbox/compare/v0.5.1...v0.5.2) (2023-12-18)
+
+
+### Bug Fixes
+
+* github documentation workflow ([b70ad40](https://github.com/vanbuiten/sandbox/commit/b70ad40c814ec17711423f5d06f9cea7873fa73c))
+
 ## [0.5.1](https://github.com/vanbuiten/sandbox/compare/v0.5.0...v0.5.1) (2023-12-18)
 
 
