@@ -3,14 +3,14 @@ version: '3.4'
 services:
   app:
     build:
-      context: .
+      context: backend/.
       target: app
     depends_on:
       - database
     ports:
       - "8240:8000"
     volumes:
-      - .:/app
+      - ./backend/app:/app
     env_file: .env
     command:
       - uvicorn
@@ -20,16 +20,6 @@ services:
       - --port
       - "8000"
       - --reload
-
-  docs:
-    build:
-      context: .
-      target: docs
-    ports:
-      - "8241:8000"
-    volumes:
-      - .:/app
-    env_file: .env
 
   database:
     image: postgres:16.1
@@ -43,6 +33,16 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  docs:
+    build:
+      context: backend/.
+      target: docs
+    ports:
+      - "8241:8000"
+    volumes:
+      - .:/app/backend/app
+    env_file: .env
 
 volumes:
   database-data:

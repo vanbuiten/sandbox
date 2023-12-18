@@ -37,7 +37,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: backend/.
           target: app
           push: ${{ github.event_name == 'release' }}
           tags: ${{ steps.meta.outputs.tags }}

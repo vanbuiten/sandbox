@@ -9,7 +9,7 @@ RUN set -eux; \
     poetry config virtualenvs.create false; \
     poetry completions bash >> ~/.bash_completion
 
-COPY . /app
+COPY ./app/ /app
 ENV PYTHONPATH=/app
 
 WORKDIR /app
@@ -18,9 +18,9 @@ EXPOSE 8000
 
 FROM base AS app
 
-RUN poetry install
+RUN poetry install --only main
 
-ENTRYPOINT ["/app/docker/entrypoint.sh"]
+ENTRYPOINT ["/app/scripts/entrypoint.sh"]
 CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
 
 FROM base AS dev
