@@ -37,7 +37,7 @@ jobs:
 
       # Add the CNAME file
       - name: Create CNAME file
-        run: echo "sandbox.davidvanbuiten.nl" > site/CNAME
+        run: echo "sandbox.davidvanbuiten.nl" > backend/app/site/CNAME
 
       # Deploy to GitHub Pages
       - name: Deploy
