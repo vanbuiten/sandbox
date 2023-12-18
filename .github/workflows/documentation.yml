@@ -30,10 +30,10 @@ jobs:
 
       # Install dependencies
       - name: Install dependencies
-        run: poetry --directory=backend/app install --with docs
+        run: poetry --directory backend/app install --with docs
 
       - name: Build documentation
-        run: poetry --directory=backend/app run mkdocs build --clean --verbose
+        run: poetry --directory backend/app run mkdocs build --config-file backend/app/mkdocs.yml --clean --verbose
 
       # Add the CNAME file
       - name: Create CNAME file
