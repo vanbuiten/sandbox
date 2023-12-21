@@ -20,6 +20,8 @@ FROM base AS app
 
 RUN poetry install --only main
 
+RUN opentelemetry-bootstrap -a install
+
 ENTRYPOINT ["/app/scripts/entrypoint.sh"]
 CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
 

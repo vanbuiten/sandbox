@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.8"
 
 services:
   app:
@@ -20,6 +20,8 @@ services:
       - --port
       - "8000"
       - --reload
+    networks:
+      - sandbox-network
 
   database:
     image: postgres:16.1
@@ -33,6 +35,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - sandbox-network
 
   docs:
     build:
@@ -43,6 +47,11 @@ services:
     volumes:
       - .:/app/backend/app
     env_file: .env
+    networks:
+      - sandbox-network
 
 volumes:
   database-data:
+
+networks:
+  sandbox-network:

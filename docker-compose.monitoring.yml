@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  jaeger-collector:
+    image: jaegertracing/jaeger-collector:latest
+    command:
+      - "--cassandra.keyspace=jaeger_v1_dc1"
+      - "--cassandra.servers=cassandra"
+      - "--sampling.initial-sampling-probability=.5"
+      - "--sampling.target-samples-per-second=.01"
+      - "--collector.otlp.enabled=true"
+    environment:
+      - SAMPLING_CONFIG_TYPE=adaptive
+    ports:
+      - "4317" # accept OpenTelemetry Protocol (OTLP) over gRPC
+      - "4318" # accept OpenTelemetry Protocol (OTLP) over HTTP
+      - "14250" # accept model.proto
+    restart: on-failure
+    depends_on:
+      cassandra-schema:
+        condition: service_started
+    networks:
+      - sandbox-network
+
+  jaeger-query:
+    image: jaegertracing/jaeger-query:latest
+    command:
+      - "--cassandra.keyspace=jaeger_v1_dc1"
+      - "--cassandra.servers=cassandra"
+    ports:
+      - "16686:16686"
+      - "16687:16687"
+    restart: on-failure
+    depends_on:
+      cassandra-schema:
+        condition: service_started
+    networks:
+      - sandbox-network
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    command:
+      - "--config=/conf/config.yaml"
+    volumes:
+      - ./otel-collector-config.yml:/conf/config.yaml
+    ports:
+      - "4317" # OTLP gRPC receiver
+      - "4318" # OTLP http receiver
+    restart: on-failure
+    depends_on:
+      jaeger-collector:
+        condition: service_started
+    networks:
+      - sandbox-network
+
+  # Cassandra instance container
+  cassandra:
+    image: cassandra:4.1.2
+    healthcheck:
+      test: [ "CMD", "cqlsh", "--execute", "DESCRIBE KEYSPACES;" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - sandbox-network
+
+  # initialize Cassandra
+  cassandra-schema:
+    image: jaegertracing/jaeger-cassandra-schema:latest
+    depends_on:
+      cassandra:
+        condition: service_healthy
+    networks:
+      - sandbox-network
+
+networks:
+  sandbox-network:
