@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.4](https://github.com/vanbuiten/sandbox/compare/v0.5.3...v0.5.4) (2024-02-19)
+
+
+### Bug Fixes
+
+* update versions of requirements ([b13ddd1](https://github.com/vanbuiten/sandbox/commit/b13ddd158229e14d433343d0ae753b587ed97ee4))
+
 ## [0.5.3](https://github.com/vanbuiten/sandbox/compare/v0.5.2...v0.5.3) (2023-12-19)
 
 
