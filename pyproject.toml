@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "sandbox"
+version = "0.1.0"
+description = "A sanbox environment for playing arround"
+authors = ["David van Buiten <david.vanbuiten@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12"
+fastapi = {extras = ["standard"], version = "^0.115.6"}
+pydantic = "^2.10.4"
+pydantic-settings = "^2.7.0"
+
+[tool.poetry.group.linting.dependencies]
+mypy = "^1.13.0"
+ruff = "^0.8.4"
+
+[tool.poetry.group.testing.dependencies]
+pytest = "^8.3.4"
+pytest-cov = "^6.0.0"
+
+[tool.poetry.group.documentation.dependencies]
+mkdocs-literate-nav = "^0.6.1"
+mkdocs-material = "^9.5.49"
+mkdocstrings = {extras = ["python"], version = "^0.27.0"}
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # isort
+    "I",
+]
+
+[tool.mypy]
+plugins = [
+  "pydantic.mypy"
+]
+strict = true
+
+[tool.coverage.run]
+omit = [
+  "tests/*",
+]

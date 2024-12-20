@@ -1,0 +1,52 @@
+services:
+  app:
+    build:
+      context: .
+      target: app
+    ports:
+      - 8000:8000
+
+  dev:
+    build:
+      context: .
+      target: dev
+    ports:
+      - 8001:8000
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - .venv/
+        - action: rebuild
+          path: ./pyproject.toml
+
+  docs:
+    build:
+      context: .
+      target: documentation
+    ports:
+      - 8002:8000
+    develop:
+      watch:
+        - action: rebuild
+          path: ./docs
+        - action: rebuild
+          path: ./mkdocs.yml
+
+  tests:
+    build:
+      context: .
+      target: tests
+    volumes:
+      - ./sandbox:/app/sandbox
+      - ./tests:/app/tests
+
+  linting:
+    build:
+      context: .
+      target: linting
+    volumes:
+      - ./sandbox:/app/sandbox
+      - ./tests:/app/tests
