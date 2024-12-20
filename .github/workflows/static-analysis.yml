@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build containers
-        run: docker buildx bake --file compose.yml
+        run: docker buildx bake --file compose.yaml
 
       - name: Run ruff formatter
         run: docker compose run --rm poetry run ruff check .
@@ -45,7 +45,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build containers
-        run: docker buildx bake --file compose.yml
+        run: docker buildx bake --file compose.yaml
 
       - name: Run MyPy
         run: docker compose run --rm poetry run mypy .
