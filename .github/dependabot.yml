@@ -6,3 +6,9 @@ updates:
       interval: "daily"
       time: "10:15"
       timezone: "Europe/Amsterdam"
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "10:15"
+      timezone: "Europe/Amsterdam"
