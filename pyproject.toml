@@ -21,7 +21,7 @@ pytest-cov = "^6.0.0"
 
 [tool.poetry.group.documentation.dependencies]
 mkdocs-literate-nav = "^0.6.1"
-mkdocs-material = "^9.5.49"
+mkdocs-material = "^9.6.11"
 mkdocstrings = {extras = ["python"], version = "^0.27.0"}
 
 [tool.poetry.group.dev.dependencies]
