@@ -17,5 +17,5 @@ updates:
       - "vanbuiten"
     schedule:
       interval: "daily"
-      time: "10:15"
+      time: "09:00"
       timezone: "Europe/Amsterdam"
