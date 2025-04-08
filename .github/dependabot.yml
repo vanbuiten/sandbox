@@ -8,6 +8,11 @@ updates:
       timezone: "Europe/Amsterdam"
   - package-ecosystem: "pip"
     directory: "/"
+    groups:
+      production-dependencies:
+        dependency-type: "production"
+    assignees:
+      - "vanbuiten"
     schedule:
       interval: "daily"
       time: "10:15"
