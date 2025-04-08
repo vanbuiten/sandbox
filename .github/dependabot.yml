@@ -9,8 +9,8 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"
     groups:
-      maintenance:
-        dependency-type: "all"
+      production-dependencies:
+        dependency-type: "production"
     assignees:
       - "vanbuiten"
     schedule:
