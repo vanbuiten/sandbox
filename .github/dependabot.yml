@@ -23,26 +23,3 @@ updates:
       prefix: "chore"
       include: "scope"
       message: "Maintenance: Update all dependencies"
-
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "daily"
-      time: "10:00"
-      timezone: "Europe/Amsterdam"
-    groups:
-      security:
-        update-types:
-          - "major"
-          - "minor"
-          - "patch"
-    reviewers:
-      - "vanbuiten"
-    assignees:
-      - "vanbuiten"
-    labels:
-      - "security"
-    commit-message:
-      prefix: "fix"
-      include: "scope"
-      message: "Security: Update dependencies for security vulnerabilities"
