@@ -2,6 +2,10 @@ name: Static analysis
 
 on: [ pull_request ]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   Ruff:
     runs-on: ubuntu-latest
