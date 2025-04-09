@@ -20,6 +20,5 @@ updates:
     labels:
       - "maintenance"
     commit-message:
-      prefix: "chore"
+      prefix: "Maintenance"
       include: "scope"
-      message: "Maintenance: Update all dependencies"
