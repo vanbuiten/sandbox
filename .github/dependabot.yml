@@ -10,7 +10,9 @@ updates:
     groups:
       maintenance:
         update-types:
-          - "all"
+          - "major"
+          - "minor"
+          - "patch"
     reviewers:
       - "vanbuiten"
     assignees:
@@ -31,7 +33,9 @@ updates:
     groups:
       security:
         update-types:
-          - "security"
+          - "major"
+          - "minor"
+          - "patch"
     reviewers:
       - "vanbuiten"
     assignees:
