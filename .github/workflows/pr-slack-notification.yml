@@ -92,24 +92,27 @@ jobs:
           case "${{ github.event.action }}" in
             created)
               if [[ "${{ github.event_name }}" == 'issue_comment' ]]; then
-                echo "EMOJI=speech_balloon" >> "${GITHUB_ENV}" # 💬
+                echo "EMOJI=speech_balloon" >> "${GITHUB_ENV}"
               fi
               ;;
             submitted)
               case "${{ github.event.review.state }}" in
                 changes_requested)
-                  echo "EMOJI=repeat" >> "${GITHUB_ENV}" # 🔁
+                  echo "EMOJI=repeat" >> "${GITHUB_ENV}"
                   ;;
                 approved)
-                  echo "EMOJI=ok" >> "${GITHUB_ENV}" # 🆗
+                  echo "EMOJI=ok" >> "${GITHUB_ENV}"
                   ;;
                 commented)
-                  echo "EMOJI=speech_balloon" >> "${GITHUB_ENV}" # 💬
+                  echo "EMOJI=speech_balloon" >> "${GITHUB_ENV}"
                   ;;
               esac
               ;;
             review_requested)
-              echo "EMOJI=eyes" >> "${GITHUB_ENV}" # 👀
+              echo "EMOJI=eyes" >> "${GITHUB_ENV}"
+              ;;
+            closed)
+              echo "EMOJI=x" >> "${GITHUB_ENV}"
               ;;
             *)
               echo "EMOJI=false" >> "${GITHUB_ENV}"
