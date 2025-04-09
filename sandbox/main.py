@@ -15,16 +15,3 @@ class RootResponse(BaseModel):
 def read_root() -> RootResponse:
     version = get_version()
     return RootResponse(version=version)
-
-
-class GreetingsRequest(BaseModel):
-    name: str
-
-
-class GreetingResponse(BaseModel):
-    hello: str
-
-
-@app.post("/greetings")
-def post_greetings(request: GreetingsRequest) -> GreetingResponse:
-    return GreetingResponse(hello=request.name)
