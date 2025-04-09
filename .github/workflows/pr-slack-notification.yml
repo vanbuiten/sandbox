@@ -53,9 +53,16 @@ jobs:
           token: ${{ secrets.MY_SLACK_BOT_TOKEN }}
           payload: |
             channel: ${{ secrets.MY_SLACK_CHANNEL_ID }}
-            thread_ts: ${{ steps.message.outputs.ts }}
-            markdown_text: "${{ github.event.pull_request.body }}"
-            
+            thread_ts: "${{ steps.message.outputs.ts }}"
+            "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ github.event.pull_request.body }}"
+                  }
+                }
+              ]
 
       - name: Create file with slack message timestamp
         run: |
