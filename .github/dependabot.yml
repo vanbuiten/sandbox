@@ -3,8 +3,7 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "weekly"
-      day: "daily"
+      interval: "daily"
       time: "09:00"
       timezone: "Europe/Amsterdam"
     groups:
