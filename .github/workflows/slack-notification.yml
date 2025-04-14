@@ -6,9 +6,6 @@ on:
     types:
       - opened
       - closed
-  issue_comment:
-    types:
-      - created
 
 permissions: read-all
 
