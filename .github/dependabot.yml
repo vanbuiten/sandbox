@@ -27,6 +27,5 @@ updates:
           - "major"
           - "minor"
           - "patch"
-    open-pull-requests-limit: 1
     commit-message:
       prefix: "Maintenance"
