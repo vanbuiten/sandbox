@@ -5,6 +5,10 @@ on:
     types:
       - opened
       - ready_for_review
+      - review_requested
+  pull_request_review:
+    types:
+      - submitted
 
 permissions: read-all
 
@@ -66,7 +70,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":seedling: *2. Deploy the PR on dev/acc*\nDeploy the branch to dev and/or acc"
+                  "text": ":seedling: *2. Deploy the PR on dev/acc*\nDeploy the branch to dev and/or acc\n${{ vars.DEV_ACC_ADDITIONAL_INFO }}"
                 }
               },
               {
@@ -101,7 +105,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":rocket: *7. Deploy the new release to prod*\nDeploy the release to prod"
+                  "text": ":rocket: *7. Deploy the new release to prod*\nDeploy the release to prod\n${{ vars.PROD_ADDITIONAL_INFO }}"
                 }
               },
               {
@@ -115,7 +119,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":clock1: *9. Timetell code*\Code: *${{secrets.TIMETELL_CODE}}*"
+                  "text": ":clock1: *9. Timetell code*\nCode: *${{secrets.TIMETELL_CODE}}*"
                 }
               }
             ]
