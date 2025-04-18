@@ -1,16 +1,12 @@
 name: pr-slack-notification
 
 on:
-  workflow_dispatch:
   pull_request:
     types:
       - opened
       - ready_for_review
       - review_requested
       - closed
-  issue_comment:
-    types:
-      - created
   pull_request_review:
     types:
       - submitted
@@ -22,6 +18,15 @@ defaults:
     shell: bash -euxo pipefail {0}
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "${GITHUB_CONTEXT}"
+
   pr-slack-notification:
     runs-on: ubuntu-latest
     name: Sends a message to Slack when a PR is opened
@@ -31,8 +36,8 @@ jobs:
         uses: actions/cache@v4.2.3
         id: slack-message-timestamp
         with:
-          key: slack-message-timestamp-for-pr-${{ github.event.pull_request.nr }}
-          restore-keys: slack-message-timestamp-for-pr-${{ github.event.pull_request.nr }}
+          path: slack-message-timestamp.txt
+          key: slack-message-timestamp-for-pr-${{ github.event.pull_request.number }}
 
       - name: Post PR summary message to slack
         if: steps.slack-message-timestamp.outputs.cache-hit != 'true'
@@ -46,14 +51,14 @@ jobs:
             text: "A PR has been created in repository ${{ github.repository }}: #${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}"
 
       - name: Post PR reaction
-        if: steps.slack-message-timestamp.outputs.cache-hit == 'true'
+        if: steps.slack-message-timestamp.outputs.cache-hit != 'true'
         uses: slackapi/slack-github-action@v2.0.0
         with:
           method: chat.postMessage
           token: ${{ secrets.MY_SLACK_BOT_TOKEN }}
           payload: |
             channel: ${{ secrets.MY_SLACK_CHANNEL_ID }}
-            thread_ts: "${{ steps.slack-message-timestamp.outputs.cache-hit }}"
+            thread_ts: "${{ steps.message.outputs.ts }}"
             "blocks": [
               {
                 "type": "section",
@@ -118,12 +123,6 @@ jobs:
         run: |
           echo "${{ steps.message.outputs.ts }}" > slack-message-timestamp.txt
 
-      - name: Cache slack message timestamp
-        if: steps.slack-message-timestamp.outputs.cache-hit != 'true'
-        uses: actions/cache@v4.2.3
-        with:
-          path: slack-message-timestamp.txt
-          key: slack-message-timestamp-for-pr-${{ github.event.pull_request.nr }}
 
   slack-emoji-react:
     runs-on: ubuntu-latest
@@ -135,13 +134,18 @@ jobs:
 
       - name: Check if a slack message timestamp is already present in the cache
         uses: actions/cache@v4.2.3
-        id: slack-message-timestamp
+        id: slack-message-timestamp-cache
         with:
-          key: slack-message-timestamp-for-pr-${{ github.event.pull_request.nr }}
-          restore-keys: slack-message-timestamp-for-pr-${{ github.event.pull_request.nr }}
+          path: slack-message-timestamp.txt
+          key: slack-message-timestamp-for-pr-${{ github.event.pull_request.number }}
+
+      - name: Read timestamp from cache
+        id: slack-message-timestamp
+        run: |
+          echo "timestamp=$(cat slack-message-timestamp.txt)" >> $GITHUB_OUTPUT
 
       - name: Decide which emoji to add
-        if: steps.slack-message-timestamp.outputs.cache-hit == 'true'
+        if: steps.slack-message-timestamp-cache.outputs.cache-hit == 'true'
         run: |
           case "${{ github.event.action }}" in
             submitted)
@@ -150,7 +154,7 @@ jobs:
                   echo "EMOJI=repeat" >> "${GITHUB_ENV}"
                   ;;
                 approved)
-                  echo "EMOJI=ok" >> "${GITHUB_ENV}"
+                  echo "EMOJI=white_check_mark" >> "${GITHUB_ENV}"
                   ;;
                 commented)
                   echo "EMOJI=speech_balloon" >> "${GITHUB_ENV}"
@@ -169,29 +173,12 @@ jobs:
           esac
 
       - name: React to PR summary message in slack with emoji
-        if: ${{ steps.slack-message-timestamp.outputs.cache-hit == 'true' && env.EMOJI != 'false' }}
+        if: ${{ steps.slack-message-timestamp-cache.outputs.cache-hit == 'true' && env.EMOJI != 'false' }}
         uses: slackapi/slack-github-action@v2.0.0
         with:
           method: reactions.add
           token: ${{ secrets.MY_SLACK_BOT_TOKEN }}
           payload: |
             channel: ${{ secrets.MY_SLACK_CHANNEL_ID }}
-            timestamp: "${{ steps.slack-message-timestamp.outputs.cache-hit }}"
+            timestamp: "${{ steps.slack-message-timestamp.outputs.timestamp }}"
             name: ${{ env.EMOJI }}
-
-      - name: Update the original message with success
-        if: ${{ github.event.pull_request.merged && steps.slack-message-timestamp.outputs.cache-hit == 'true' }}
-        uses: slackapi/slack-github-action@v2.0.0
-        with:
-          method: chat.update
-          token: ${{ secrets.MY_SLACK_BOT_TOKEN }}
-          payload: |
-            channel: ${{ secrets.MY_SLACK_CHANNEL_ID }}
-            ts: "${{ steps.slack-message-timestamp.outputs.cache-hit }}"
-            text: ":twisted_rightwards_arrows: *${{ github.event.pull_request.user.login }}*: <${{ github.event.pull_request.html_url }}|#${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}> (+${{ github.event.pull_request.additions }}, -${{ github.event.pull_request.deletions }})"
-            attachments:
-              - color: "28a745"
-                fields:
-                  - title: "Status"
-                    short: true
-                    value: "Merged :twisted_arrows_right:"
