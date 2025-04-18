@@ -10,13 +10,7 @@ on:
     types:
       - submitted
 
-permissions:
-  contents: read
-  actions: read
-  id-token: write
-  secrets:
-    - ${{ secrets.MY_SLACK_BOT_TOKEN }}
-    - ${{ secrets.MY_SLACK_CHANNEL_ID }}
+permissions: read-all
 
 defaults:
   run:
