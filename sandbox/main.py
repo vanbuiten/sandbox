@@ -13,5 +13,8 @@ class RootResponse(BaseModel):
 
 @app.get("/")
 def read_root() -> RootResponse:
+    """
+    Root path
+    """
     version = get_version()
     return RootResponse(version=version)
