@@ -5,11 +5,6 @@ on:
     types:
       - opened
       - ready_for_review
-      - review_requested
-      - closed
-  pull_request_review:
-    types:
-      - submitted
 
 permissions: read-all
 
@@ -34,13 +29,13 @@ jobs:
     steps:
       - name: Check if a slack message timestamp is already present in the cache
         uses: actions/cache@v4.2.3
-        id: slack-message-timestamp
+        id: slack-message-timestamp-cache
         with:
           path: slack-message-timestamp.txt
           key: slack-message-timestamp-for-pr-${{ github.event.pull_request.number }}
 
       - name: Post PR summary message to slack
-        if: steps.slack-message-timestamp.outputs.cache-hit != 'true'
+        if: steps.slack-message-timestamp-cache.outputs.cache-hit != 'true'
         id: message
         uses: slackapi/slack-github-action@v2.0.0
         with:
@@ -51,7 +46,7 @@ jobs:
             text: "A PR has been created in repository ${{ github.repository }}: #${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}"
 
       - name: Post PR reaction
-        if: steps.slack-message-timestamp.outputs.cache-hit != 'true'
+        if: steps.slack-message-timestamp-cache.outputs.cache-hit != 'true'
         uses: slackapi/slack-github-action@v2.0.0
         with:
           method: chat.postMessage
@@ -78,48 +73,55 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":mag: *3. Check dev/acc*\nCheck if dev and/or acc are still working"
+                  "text": ":bulb: *3. Check the Trivy output*\nCheck if there are any vunerable packages in reported by Trivy that can be fixed"
                 }
               },
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":twisted_rightwards_arrows: *4. Merge the PR*\nMerge the PR to main"
+                  "text": ":mag: *4. Check dev/acc*\nCheck if dev and/or acc are still working"
                 }
               },
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":label: *5. Create a new release*\nCreate a new release"
+                  "text": ":twisted_rightwards_arrows: *5. Merge the PR*\nMerge the PR to main"
                 }
               },
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":rocket: *6. Deploy the new release to prod*\nDeploy the release to prod"
+                  "text": ":label: *6. Create a new release*\nCreate a new release"
                 }
               },
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":mag_right: *7. Check prod*\nCheck if prod is still working"
+                  "text": ":rocket: *7. Deploy the new release to prod*\nDeploy the release to prod"
                 }
               },
               {
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":clock1: *8. Log time spent on PR review*\nTimetell code *${{secrets.TIMETELL_CODE}}*"
+                  "text": ":mag_right: *8. Check prod*\nCheck if prod is still working"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":clock1: *9. Timetell code*\Code: *${{secrets.TIMETELL_CODE}}*"
                 }
               }
             ]
 
       - name: Create file with slack message timestamp
-        if: steps.slack-message-timestamp.outputs.cache-hit != 'true'
+        if: steps.slack-message-timestamp-cache.outputs.cache-hit != 'true'
         run: |
           echo "${{ steps.message.outputs.ts }}" > slack-message-timestamp.txt
 
@@ -145,35 +147,27 @@ jobs:
           echo "timestamp=$(cat slack-message-timestamp.txt)" >> $GITHUB_OUTPUT
 
       - name: Decide which emoji to add
+        id: emoji-to-add
         if: steps.slack-message-timestamp-cache.outputs.cache-hit == 'true'
         run: |
           case "${{ github.event.action }}" in
             submitted)
               case "${{ github.event.review.state }}" in
-                changes_requested)
-                  echo "EMOJI=repeat" >> "${GITHUB_ENV}"
-                  ;;
                 approved)
-                  echo "EMOJI=white_check_mark" >> "${GITHUB_ENV}"
-                  ;;
-                commented)
-                  echo "EMOJI=speech_balloon" >> "${GITHUB_ENV}"
+                  echo "emoji=white_check_mark" >> $GITHUB_OUTPUT
                   ;;
               esac
               ;;
             review_requested)
-              echo "EMOJI=eyes" >> "${GITHUB_ENV}"
-              ;;
-            closed)
-              echo "EMOJI=x" >> "${GITHUB_ENV}"
+              echo "emoji=eyes" >> $GITHUB_OUTPUT
               ;;
             *)
-              echo "EMOJI=false" >> "${GITHUB_ENV}"
+              echo "emoji=false" >> $GITHUB_OUTPUT
               ;;
           esac
 
       - name: React to PR summary message in slack with emoji
-        if: ${{ steps.slack-message-timestamp-cache.outputs.cache-hit == 'true' && env.EMOJI != 'false' }}
+        if: ${{ steps.slack-message-timestamp-cache.outputs.cache-hit == 'true' && steps.emoji-to-add.outputs.emoji != 'false' }}
         uses: slackapi/slack-github-action@v2.0.0
         with:
           method: reactions.add
@@ -181,4 +175,4 @@ jobs:
           payload: |
             channel: ${{ secrets.MY_SLACK_CHANNEL_ID }}
             timestamp: "${{ steps.slack-message-timestamp.outputs.timestamp }}"
-            name: ${{ env.EMOJI }}
+            name: ${{ steps.emoji-to-add.outputs.emoji }}
