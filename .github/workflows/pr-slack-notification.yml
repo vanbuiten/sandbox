@@ -41,7 +41,7 @@ jobs:
       - name: Post PR summary message to slack
         if: steps.slack-message-timestamp-cache.outputs.cache-hit != 'true'
         id: message
-        uses: slackapi/slack-github-action@v2.0.0
+        uses: slackapi/slack-github-action@v2.1.0
         with:
           method: chat.postMessage
           token: ${{ secrets.MY_SLACK_BOT_TOKEN }}
@@ -51,7 +51,7 @@ jobs:
 
       - name: Post PR reaction
         if: steps.slack-message-timestamp-cache.outputs.cache-hit != 'true'
-        uses: slackapi/slack-github-action@v2.0.0
+        uses: slackapi/slack-github-action@v2.1.0
         with:
           method: chat.postMessage
           token: ${{ secrets.MY_SLACK_BOT_TOKEN }}
@@ -174,7 +174,7 @@ jobs:
 
       - name: React to PR summary message in slack with emoji
         if: ${{ steps.slack-message-timestamp-cache.outputs.cache-hit == 'true' && steps.emoji-to-add.outputs.emoji != 'false' }}
-        uses: slackapi/slack-github-action@v2.0.0
+        uses: slackapi/slack-github-action@v2.1.0
         with:
           method: reactions.add
           token: ${{ secrets.MY_SLACK_BOT_TOKEN }}
